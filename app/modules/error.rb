@@ -1,13 +1,15 @@
+# frozen_string_literal: true
+
 module Error
   extend ActiveSupport::Autoload
 
   CODES = {
-    invalid_token: 'invalid_token',
-    unknown: 'unknown',
-    param_invalid: 'param_invalid',
-    record_invalid: 'record_invalid',
-    record_not_found: 'record_not_found',
-    login_failed: 'login_failed',
+    invalid_token: "invalid_token",
+    unknown: "unknown",
+    param_invalid: "param_invalid",
+    record_invalid: "record_invalid",
+    record_not_found: "record_not_found",
+    login_failed: "login_failed",
   }.freeze
 
   class Base < ::StandardError
@@ -15,17 +17,16 @@ module Error
 
     attr_reader :code, :status
 
-    def initialize *args
+    def initialize(*args)
       underscore_name = self.class.name.underscore
-      key = underscore_name.gsub('error/', '').gsub(/\//, '_').to_sym
-      @code = Error::CODES[key]
+      @code = underscore_name.gsub("error/", "").tr("/", "_").to_sym
       @status = self.class::STATUS
 
       if args.length.zero?
-        t_key = underscore_name.gsub /\//, '.'
+        t_key = underscore_name.tr("/", ".")
         super I18n.t(t_key)
       else
-        super *args
+        super(*args)
       end
     end
 
@@ -34,8 +35,8 @@ module Error
         error: {
           code: code,
           message: message,
-          status: status
-        }
+          status: status,
+        },
       }
     end
   end
@@ -46,4 +47,7 @@ module Error
   class RecordInvalid < Error::Base; end
   class RecordNotFound < Error::Base; end
   class LoginFailed < Error::Base; end
+  class Unauthorized < Error::Base
+    STATUS = 401
+  end
 end

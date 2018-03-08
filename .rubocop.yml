@@ -1,0 +1,39 @@
+inherit_gem:
+  onkcop: "config/rubocop.yml"
+
+Rails:
+  Enabled: true
+
+AllCops:
+  TargetRubyVersion: 2.3
+  DisplayCopNames: true
+  Exclude:
+    - "vendor/**/*"
+    - "db/schema.rb"
+    - "tmp/**/*"
+    - "bin/*"
+    - "config/application.rb"
+    - "config/environments/*"
+    - "config/puma.rb"
+    - "engine/radio_shack/vendor/**/*"
+    - "engine/radio_shack/bin/*"
+    - "engine/radio_shack/spec/**/*"
+    - "engine/radio_shack/radio_shack.gemspec"
+    - "db/migrate/*"
+    - "db/seeds/*"
+    - "config/deploy.rb"
+    # PRレビュー用の定義ファイルえあるDangerは除外
+    - "Dangerfile"
+    - "test/"
+
+Lint/UselessAccessModifier:
+  ContextCreatingMethods:
+    - concerning
+
+Metrics/MethodLength:
+  CountComments: false
+  Max: 40
+
+Metrics/ClassLength:
+  CountComments: false
+  Max: 3000

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # server-based syntax
 # ======================
 # Defines a single server with a list of roles and multiple properties.
@@ -5,8 +7,8 @@
 
 # server "example.com", user: "deploy", roles: %w{app db web}, my_property: :my_value
 # server "example.com", user: "deploy", roles: %w{app web}, other_property: :other_value
-server "xx.221.9.71", user: "deploy", roles: %w{app db web}
-set :bundle_without, %w(test development).join(" ")
+server "xx.221.9.71", user: "deploy", roles: %w[app db web]
+set :bundle_without, %w[test development].join(" ")
 
 # role-based syntax
 # ==================
@@ -20,8 +22,6 @@ set :bundle_without, %w(test development).join(" ")
 # role :web, %w{user1@primary.com user2@additional.com}, other_property: :other_value
 # role :db,  %w{deploy@example.com}
 
-
-
 # Configuration
 # =============
 # You can set any configuration variable like in config/deploy.rb
@@ -29,8 +29,6 @@ set :bundle_without, %w(test development).join(" ")
 # For available Capistrano configuration variables see the documentation page.
 # http://capistranorb.com/documentation/getting-started/configuration/
 # Feel free to add new variables to customise your setup.
-
-
 
 # Custom SSH Options
 # ==================
@@ -40,10 +38,8 @@ set :bundle_without, %w(test development).join(" ")
 #
 # Global options
 # --------------
-set :ssh_options, {
- keys: %w(/home/le.van.ban/.ssh/id_rsa),
- forward_agent: false,
-}
+set :ssh_options, keys: %w[/home/le.van.ban/.ssh/id_rsa],
+                  forward_agent: false
 #
 # The server-based syntax can be used to override options:
 # ------------------------------------

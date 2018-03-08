@@ -13,7 +13,7 @@ development:
 
 test:
   <<: *default
-  database: kids_taxi_test
+  database: TS_CLX_test
 
 staging:
   <<: *default
